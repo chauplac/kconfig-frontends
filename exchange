@@ -63,8 +63,8 @@ path "database/creds/readonly" {
         capabilities = [ "read" ]
 }
 # Encrypt using EU key
-path "eu_encryption/*crypt/erp" {
-        capabilities = [ "write" ]
+path "eu_encryption/*/erp" {
+        capabilities = [ "create", "update" ]
 }
 END
 terraform init
