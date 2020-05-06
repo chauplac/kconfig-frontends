@@ -23,6 +23,11 @@ path "secret/mysql/*" {
         capabilities = [ "create", "read", "update", "delete", "list" ]
 }
 
+# To read enabled secrets engines
+path "sys/mounts" {
+        capabilities = [ "read" ]
+}
+
 # Mount secrets engines
 path "sys/mounts/*" {
         capabilities = [ "create", "read", "update", "delete", "list" ]
@@ -41,6 +46,15 @@ path "sys/policies/acl/*" {
 # Manage tokens for verification
 path "auth/token/create" {
         capabilities = [ "create", "read", "update", "delete", "list", "sudo" ]
+}
+# Enable transit secrets engine
+path "sys/mounts/transit" {
+        capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Manage the transit secrets engine
+path "transit/*" {
+        capabilities = [ "create", "read", "update", "delete", "list" ]
 }
 END
 cat >policy_app.hcl<<END
