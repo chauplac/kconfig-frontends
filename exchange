@@ -58,8 +58,13 @@ path "transit/*" {
 }
 END
 cat >policy_app.hcl<<END
+# Get DB credentials
 path "database/creds/readonly" {
         capabilities = [ "read" ]
+}
+# Encrypt using EU key
+path "eu_encryption/*crypt/erp" {
+        capabilities = [ "write" ]
 }
 END
 terraform init
