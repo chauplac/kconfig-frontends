@@ -65,7 +65,7 @@ EOF
 chmod 644 ~/.ssh/config
 
 echo Wait 60s for Vaults to be ready
-sleep 60
+sleep 120
 export VAULT_ADDR=http://localhost:8200
 
 # Tunnel, init, license all Vaults
@@ -74,6 +74,10 @@ do
   eval $(terraform output Jump_to_$v)
   vault operator init -format=json -recovery-shares=1 -recovery-threshold=1 -recovery-pgp-keys="keybase:hashicorpchip" >> vault.$v.json
   export VAULT_TOKEN=$(jq -r .root_token vault.$v.json)
+  vault write sys/license text="$VAULT_LICENSE"
+  vault write sys/license text="$VAULT_LICENSE"
+  vault write sys/license text="$VAULT_LICENSE"
+  vault write sys/license text="$VAULT_LICENSE"
   vault write sys/license text="$VAULT_LICENSE"
   eval $(terraform output Jump_Close)
 done
